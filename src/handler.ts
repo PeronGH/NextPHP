@@ -6,14 +6,14 @@ export function createHandler({
   handleError = () => new Response("Internal Server Error", { status: 500 }),
   handleNotFound = () => new Response("Not Found", { status: 404 }),
 }: CreateHandlerOptions): Deno.ServeHandler {
-  return async (request, info) => {
-    const { pathname } = new URL(request.url);
+  return async (req, info) => {
+    const { pathname } = new URL(req.url);
 
     const responseInit: ResponseInit = {
       headers: new Headers({ "Content-Type": "text/html; charset=utf-8" }),
     };
 
-    data = { ...data, request, info, response: responseInit };
+    data = { ...data, req: Object.assign(req, { info }), res: responseInit };
     let body: string | undefined;
 
     try {
@@ -23,13 +23,13 @@ export function createHandler({
         root,
       });
     } catch (e) {
-      if (e.name === "NotFound") return handleNotFound(request);
+      if (e.name === "NotFound") return handleNotFound(req);
 
       console.warn(`Error while rendering ${pathname}:`, e);
-      return handleError(request, e);
+      return handleError(req, e);
     }
 
-    if (body === undefined) return handleNotFound(request);
+    if (body === undefined) return handleNotFound(req);
 
     return new Response(body, responseInit);
   };

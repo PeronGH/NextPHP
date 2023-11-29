@@ -7,7 +7,7 @@
     </head>
     <body>
         <code>
-            <%- await include('../partials/greeting', { name: info.remoteAddr.hostname }) %>
+            <%- await include('../partials/greeting', { name: req.info.remoteAddr.hostname }) %>
         </code>
     </body>
 </html>
