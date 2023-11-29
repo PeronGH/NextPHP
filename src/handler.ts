@@ -10,7 +10,9 @@ export function createHandler({
   return async (request, info) => {
     const { pathname } = new URL(request.url);
 
-    data = { ...data, request, info };
+    const responseInit: ResponseInit = {};
+
+    data = { ...data, request, info, response: responseInit };
     let body: string | undefined;
 
     try {
@@ -27,9 +29,12 @@ export function createHandler({
 
     if (body === undefined) return handleNotFound(request);
 
-    return new Response(body, {
-      headers: { "Content-Type": "text/html; charset=utf-8" },
-    });
+    const headers = new Headers(responseInit.headers);
+    if (!headers.has("Content-Type")) {
+      headers.set("Content-Type", "text/html; charset=utf-8");
+    }
+
+    return new Response(body, { ...responseInit, headers });
   };
 }
 
