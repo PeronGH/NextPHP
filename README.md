@@ -13,7 +13,7 @@ NextPHP is a web framework for people who love PHP so much that they want to wri
     <% } else { %>
     <form method="POST">
         <input type="text" name="name" />
-        <button type="submit">Submit</button>
+        <button type="submit">Greet</button>
     </form>
     <% } %>
 </body>
