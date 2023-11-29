@@ -1,7 +1,7 @@
 import { ejs, path } from "./deps.ts";
 
 export async function render(
-  { templatePath, data, root, extname = ".ejs" }: RenderOptions,
+  { templatePath, data, root }: RenderOptions,
 ): Promise<string | undefined> {
   const jointPath = path.join(root, templatePath);
   if (!jointPath.startsWith(root)) return;
@@ -15,7 +15,7 @@ export async function render(
     // do nothing
   }
 
-  if (path.extname(filepath) !== extname) filepath += extname;
+  if (!filepath.endsWith(".ejs")) filepath += ".ejs";
 
   return await ejs.renderFile(filepath, data, { async: true });
 }
@@ -23,7 +23,6 @@ export async function render(
 export interface TemplateOptions {
   data?: ejs.Data;
   root: string;
-  extname?: string;
 }
 
 export interface RenderOptions extends TemplateOptions {
