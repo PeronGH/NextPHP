@@ -25,7 +25,7 @@ export function createHandler({
         extname,
       });
     } catch (e) {
-      console.error(`Error while rendering ${pathname}:`, e);
+      console.warn(`Error while rendering ${pathname}:`, e);
       return handleError(request, e);
     }
 
