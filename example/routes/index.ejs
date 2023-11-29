@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Example</title>
-    </head>
-    <body>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example</title>
+</head>
+
+<body>
+    <% if (req.method === 'POST') { %>
         <code>
-            <%- await include('../partials/greeting', { name: req.info.remoteAddr.hostname }) %>
+            <%- await include('../partials/greeting', { name: (await req.formData()).get('name') }) %>
         </code>
+    <% } else { %>
+        <form method="POST">
+            <input type="text" name="name" />
+            <button type="submit">Submit</button>
+        </form>
+    <% } %>
     </body>
 </html>
