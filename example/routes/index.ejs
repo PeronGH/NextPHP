@@ -6,6 +6,8 @@
         <title>Example</title>
     </head>
     <body>
-        <code> Hello, <%= info.remoteAddr.hostname %>! </code>
+        <code>
+            <%- await include('partials/greeting', { name: info.remoteAddr.hostname }) %>
+        </code>
     </body>
 </html>
