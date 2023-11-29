@@ -3,7 +3,7 @@ import { ejs, path } from "./deps.ts";
 export async function render(
   { templatePath, data, root }: RenderOptions,
 ): Promise<string | undefined> {
-  // clone data to prevent mutation
+  // clone data to prevent unexpected mutation
   data = { ...data };
 
   const jointPath = path.join(root, templatePath);
@@ -19,7 +19,8 @@ export async function render(
   }
 
   const lastEjsEndIndex = filepath.lastIndexOf(".ejs") + ".ejs".length;
-  if (lastEjsEndIndex !== filepath.length) {
+  if (lastEjsEndIndex === -1) return;
+  else if (lastEjsEndIndex !== filepath.length) {
     // handle dynamic route
     data.routeParam = filepath.slice(lastEjsEndIndex);
     filepath = filepath.slice(0, lastEjsEndIndex);
