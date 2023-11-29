@@ -10,11 +10,12 @@
 <body>
     <% if (req.method === 'POST') { %>
     <h2>
-        <%- await include('../partials/greeting', {name: (await req.formData()).get('name')}) %>
+        <%- await include('../partials/greeting', { name: (await req.formData()).get('name') }) %>
     </h2>
     <% } else { %>
     <form method="POST">
-        <input type="text" name="name" /> <button type="submit">Submit</button>
+        <input type="text" name="name" />
+        <button type="submit">Submit</button>
     </form>
     <% } %>
 </body>
