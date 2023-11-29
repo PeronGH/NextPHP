@@ -17,7 +17,12 @@ export async function render(
 
   if (!filepath.endsWith(".ejs")) filepath += ".ejs";
 
-  return await ejs.renderFile(filepath, data, { async: true });
+  try {
+    return await ejs.renderFile(filepath, data, { async: true });
+  } catch (e) {
+    if (e.name === "NotFound") return;
+    throw e;
+  }
 }
 
 export interface TemplateOptions {

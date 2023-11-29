@@ -23,8 +23,6 @@ export function createHandler({
         root,
       });
     } catch (e) {
-      if (e.name === "NotFound") return handleNotFound(req);
-
       console.warn(`Error while rendering ${pathname}:`, e);
       return handleError(req, e);
     }
