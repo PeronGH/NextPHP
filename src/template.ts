@@ -7,7 +7,14 @@ export async function render(
   if (!jointPath.startsWith(root)) return;
 
   let filepath = jointPath;
-  if (filepath.endsWith("/")) filepath += "index";
+
+  try {
+    const { isDirectory } = await Deno.stat(filepath);
+    if (isDirectory) filepath = path.join(filepath, "index");
+  } catch {
+    // do nothing
+  }
+
   if (path.extname(filepath) !== extname) filepath += extname;
 
   return await ejs.renderFile(filepath, data, { async: true });
