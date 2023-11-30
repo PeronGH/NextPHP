@@ -20,13 +20,9 @@ export async function render(
 
   const lastEjsEndIndex = filepath.lastIndexOf(".ejs") + ".ejs".length;
   if (lastEjsEndIndex === -1) return;
-  else if (lastEjsEndIndex !== filepath.length) {
-    // handle dynamic route
-    data.routeParam = filepath.slice(lastEjsEndIndex);
-    filepath = filepath.slice(0, lastEjsEndIndex);
-  } else {
-    data.routeParam = undefined;
-  }
+
+  data.routeParam = filepath.slice(lastEjsEndIndex);
+  filepath = filepath.slice(0, lastEjsEndIndex);
 
   try {
     return await ejs.renderFile(filepath, data, { async: true });
