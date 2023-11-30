@@ -31,8 +31,10 @@ NextPHP is a web framework for people who love PHP so much that they want to wri
 ### JSON Response
 
 ```ejs
-<%- JSON.stringify(Object.fromEntries(req.headers)) %>
-<% res.headers.set('Content-Type', 'application/json') %>
+<% 
+res.headers.set('Content-Type', 'application/json') 
+echo(JSON.stringify(Object.fromEntries(req.headers)))
+%>
 ```
 
 ## Usage

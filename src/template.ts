@@ -29,6 +29,7 @@ export async function render(
     return await ejs.renderFile(filepath, data, {
       async: true,
       rmWhitespace: true,
+      outputFunctionName: "echo",
     });
   } catch (e) {
     if (e.name === "NotFound") return;

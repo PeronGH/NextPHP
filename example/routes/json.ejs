@@ -1,2 +1,4 @@
-<%- JSON.stringify(Object.fromEntries(req.headers)) %>
-<% res.headers.set('Content-Type', 'application/json') %>
+<% 
+res.headers.set('Content-Type', 'application/json') 
+echo(JSON.stringify(Object.fromEntries(req.headers)))
+%>
