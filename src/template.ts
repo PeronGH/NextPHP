@@ -26,7 +26,10 @@ export async function render(
   data.route.filepath = filepath;
 
   try {
-    return await ejs.renderFile(filepath, data, { async: true });
+    return await ejs.renderFile(filepath, data, {
+      async: true,
+      rmWhitespace: true,
+    });
   } catch (e) {
     if (e.name === "NotFound") return;
     throw e;
