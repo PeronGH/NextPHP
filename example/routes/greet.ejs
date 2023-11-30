@@ -9,7 +9,7 @@
 
 <body>
     <h2>
-        <%- routeParam && await include('../partials/greeting', { name: routeParam.slice(1) }) %>
+        <%- route.param && await include('../partials/greeting', { name: route.param.slice(1) }) %>
     </h2>
 </body>
 

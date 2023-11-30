@@ -4,7 +4,7 @@ export async function render(
   { templatePath, data, root }: RenderOptions,
 ): Promise<string | undefined> {
   // clone data to prevent unexpected mutation
-  data = { ...data };
+  data = { ...data, route: {} };
 
   const jointPath = path.join(root, templatePath);
   if (!jointPath.startsWith(root)) return;
@@ -21,8 +21,9 @@ export async function render(
   const lastEjsEndIndex = filepath.lastIndexOf(".ejs") + ".ejs".length;
   if (lastEjsEndIndex === -1) return;
 
-  data.routeParam = filepath.slice(lastEjsEndIndex);
+  data.route.param = filepath.slice(lastEjsEndIndex);
   filepath = filepath.slice(0, lastEjsEndIndex);
+  data.route.filepath = filepath;
 
   try {
     return await ejs.renderFile(filepath, data, { async: true });
