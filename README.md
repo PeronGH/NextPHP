@@ -2,7 +2,16 @@
 
 NextPHP is a web framework for people who love PHP so much that they want to write it in JavaScript.
 
-## Preview
+## Features
+
+- PHP-like development experience, but in JavaScript
+- Full support for SSR
+- Filesystem-based routing
+- Can run on Deno Deploy
+
+## How does PHP written in JavaScript look like?
+
+Here's an example of handling a form submission:
 
 ```html
 <body>
