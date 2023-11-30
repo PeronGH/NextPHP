@@ -11,9 +11,9 @@ NextPHP is a web framework for people who love PHP so much that they want to wri
 
 ## How does PHP written in JavaScript look like?
 
-Here's an example of handling a form submission:
+### Form Submission
 
-```html
+```ejs
 <body>
     <% if (req.method === 'POST') { %>
     <h2>
@@ -26,6 +26,13 @@ Here's an example of handling a form submission:
     </form>
     <% } %>
 </body>
+```
+
+### JSON Response
+
+```ejs
+<%- JSON.stringify(Object.fromEntries(req.headers)) %>
+<% res.headers.set('Content-Type', 'application/json') %>
 ```
 
 ## Usage
